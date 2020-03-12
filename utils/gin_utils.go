@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+//gin中间件函数,用于设置一些基本对象,同时可以计算整体数据计算流程花费的时间
 func logMiddleware(logger *logrus.Logger) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		reqID := c.Request.Header.Get("X-Request-Id")
