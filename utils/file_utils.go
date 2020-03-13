@@ -78,6 +78,7 @@ func ProtectString(str string) string {
 	return str[0:l] + "***"
 }
 
+//通过反射将struct数据类型中的字段映射成map
 func Struct2Map(obj interface{}) map[string]interface{} {
 	t := reflect.TypeOf(obj)
 	v := reflect.ValueOf(obj)
