@@ -1,0 +1,29 @@
+// initialize log
+func initLog(logLevel log.Level, pretty bool, logFile string) *log.Logger {
+	logger := log.New()
+	logger.SetOutput(os.Stdout)
+	logger.SetReportCaller(true)
+	logger.SetLevel(log.Level(logLevel))
+	formatter := &log.JSONFormatter{
+		TimestampFormat: time.RFC3339Nano,
+		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
+			s := strings.SplitAfterN(f.File, "SenseRealEstate/", 2)
+			filename := s[len(s)-1]
+			return f.Function, fmt.Sprintf("%s:%d", filename, f.Line)
+		},
+		PrettyPrint: pretty,
+	}
+	if len(logFile) > 0 {
+		logfile, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+		if err != nil {
+			log.Fatalf("open log file err, %v", err)
+		}
+		defer logfile.Close()
+
+		formatter.PrettyPrint = false
+		logger.SetOutput(logfile)
+	}
+
+	logger.SetFormatter(formatter)
+	return logger
+}
