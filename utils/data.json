@@ -1,0 +1,14 @@
+{
+    "basic_info":{
+        "upload_date":"2021-04-25 14:17:05.974168",
+        "device_id":"AUTH",
+        "tss":{
+            "date":"2021",
+            "system_version":{
+                "system":"1.7.1",
+                "plug":"1.7.3",
+                "patch":"1.7.22"
+            }
+        }
+    }
+}
