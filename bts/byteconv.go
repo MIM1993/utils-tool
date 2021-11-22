@@ -25,3 +25,13 @@ func StringToBytes(s string) (b []byte) {
 	bh.Data, bh.Len, bh.Cap = sh.Data, sh.Len, sh.Len
 	return b
 }
+
+//针对 json 解析的特性,对reflect.DeepEqual 函数进行改造适配。
+func DeepEqual(v1, v2 interface{}) bool {
+	 if reflect.DeepEqual(v1, v2) {
+	  return true
+	 }
+	 bytesA, _ := json.Marshal(v1)
+	 bytesB, _ := json.Marshal(v2)
+	 return bytes.Equal(bytesA, bytesB)
+}
