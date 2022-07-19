@@ -53,6 +53,24 @@ func Stamp2Time(stamp int64) time.Time {
 }
 
 //获取网络上的时间
+type packet struct {
+	Settings       uint8
+	Stratum        uint8
+	Poll           int8
+	Precision      int8
+	RootDelay      uint32
+	RootDispersion uint32
+	ReferenceID    uint32
+	RefTimeSec     uint32
+	RefTimeFrac    uint32
+	OrigTimeSec    uint32
+	OrigTimeFrac   uint32
+	RxTimeSec      uint32
+	RxTimeFrac     uint32
+	TxTimeSec      uint32
+	TxTimeFrac     uint32
+}
+
 func GetRemoteTime() (*time.Time, error) {
 	var host string = "time.windows.com:123"
 	// 182.92.12.11:123 是阿里的ntp服务器，可以换成其他域名的
