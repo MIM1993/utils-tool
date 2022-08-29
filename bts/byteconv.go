@@ -35,3 +35,18 @@ func DeepEqual(v1, v2 interface{}) bool {
 	 bytesB, _ := json.Marshal(v2)
 	 return bytes.Equal(bytesA, bytesB)
 }
+
+//将[]byte形式的数字转为int
+func byteToInt(number []byte) (int, error) {
+	var sum int
+	x := 1
+	for i := len(number) - 1; i >= 0; i-- {
+		if number[i] < '0' || number[i] > '9' {
+			return 0, errors.New("toNumberError")
+		}
+		sum += int(number[i]-'0') * x
+		x = x * 10
+	}
+
+	return sum, nil
+}
