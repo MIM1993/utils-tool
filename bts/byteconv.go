@@ -3,6 +3,7 @@ package internal
 import (
 	"reflect"
 	"unsafe"
+	"github.com/axgle/mahonia"
 )
 
 // BytesToString converts byte slice to a string without memory allocation.
@@ -49,4 +50,9 @@ func byteToInt(number []byte) (int, error) {
 	}
 
 	return sum, nil
+}
+
+//将gbk格式转换为utf8格式
+func CoverGBKToUTF8(src string) string {
+	return mahonia.NewDecoder("gbk").ConvertString(src)
 }
